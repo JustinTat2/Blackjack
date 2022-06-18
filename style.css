@@ -1,0 +1,155 @@
+/* Global reset */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+/* Centering our page with equal spacing on left and right side */
+.container {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+/* Styling the header that stays at the top when scrolling */
+.post-header {
+  background: rgba(252, 252, 252, 1);
+  text-align: center;
+  position: sticky;
+  width: 100%;
+  top: 0;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.post-header h1 {
+  width: 100%;
+  font-size: 16px;
+}
+
+.post-header a:link,
+a:visited {
+  font-size: 14px;
+  color: black;
+  text-decoration: none;
+}
+
+.post-header a:hover,
+a:visited {
+  font-weight: bold;
+}
+
+/* h2 element "Basics of Blackjack ♠️" */
+.article-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Blackjack table image */
+.blackjack-table {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-bottom: 2px;
+}
+
+.description {
+  text-align: center;
+  color: #808080;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.fun-facts li {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+.fun-facts li:last-child {
+  margin-bottom: 30px;
+}
+
+.footer {
+  background-color: #add8e6;
+  text-align: center;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  padding: 8px 16px;
+  margin-bottom: 30px;
+}
+
+.footer a:link,
+a:visited {
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.footer a:hover,
+a:active {
+  text-decoration: underline;
+}
+
+.related {
+  background-color: #add8e6;
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 10px 20px 70px;
+  border: 2px solid black;
+  position: relative;
+  height: 200px;
+}
+
+.poker::after {
+  content: "Basics of Poker ♠️";
+  position: absolute;
+  top: 85%;
+  left: 17%;
+}
+
+.rummy::after {
+  content: "Basics of Gin Rummy ♠️";
+  position: absolute;
+  top: 85%;
+  left: 42%;
+}
+
+.crazy-eights::after {
+  content: "Basics of Crazy Eights ♠️";
+  position: absolute;
+  top: 85%;
+  right: 14%;
+}
+
+.poker {
+  margin-right: 20px;
+  display: inline-block;
+}
+
+.rummy {
+  margin-right: 20px;
+  display: inline-block;
+}
+
+.crazy-eights {
+  display: inline-block;
+}
+
+.related h3 {
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
