@@ -14,12 +14,15 @@
     <div class="container">
       <header class="post-header">
         <h1>The Oaklawn Avenue Post</h1>
-        <a href="https://www.facebook.com/JustinTat4" target="_blank">Facebook</a>
-        <a href="https://github.com/JustinTat2" target="_blank">GitHub</a>
-        <a href="https://twitter.com/JustinTat5" target="_blank">Twitter</a>
+        <div class="header-links">
+          <a href="https://www.facebook.com/JustinTat4" target="_blank">Facebook</a>
+          <a href="https://github.com/JustinTat2" target="_blank">GitHub</a>
+          <a href="https://twitter.com/JustinTat5" target="_blank">Twitter</a>
+        </div>
       </header>
 
-      <article>
+      <div class="row">
+      <article class="article">
         <h2 class="article-title">Basics of Blackjack ♠️</h2>
         <img
           class="blackjack-table"
@@ -94,22 +97,10 @@
         </ul>
       </article>
 
-      <aside class="related">
-        <h3>Related Posts</h3>
-        <div class="poker">
-          <img src="Royal-Flush.jpeg" alt="Royal Flush in hearts" width=240 height=180 />
-        </div>
-        <div class="rummy">
-          <img src="Rummy.jpeg" alt="Gin rummy" width=240 height=180 />
-        </div>
-        <div class="crazy-eights">
-          <img src="Crazy-Eights.jpeg" alt="Crazy eights" width=240 height=180 />
-        </div>
-      </aside>
-
+      
       <footer class="footer">
         <p>Here are the resources I used to make this webpage.</p>
-        <ul>
+        <ul class="resources-list">
           <a href=https://icons8.com/icons/set/favicon>Favicon</a>
           <a href=https://simple.wikipedia.org/wiki/Blackjack>A Blackjack table</a>
           <a href=https://crescent.edu/post/the-history-of-blackjack#:~:text=The%20origins%20of%20Blackjack%20is,were%20popular%20at%20that%20time.>Origins</a>
@@ -120,7 +111,48 @@
           <a href="https://en.wikipedia.org/wiki/Crazy_Eights#/media/File:8_playing_cards.jpg">Crazy Eights</a>
         </ul>
       </footer>
+    </div>
 
+    <div class="game">
+      <h2>Practice Blackjack against the CPU!</h2>
+
+      <div class="dealer-hand">
+        <img src="luigi.jpeg" alt="Luigi dressed as a dealer" width="250" height="auto" />
+        <div class="dealers-cards">
+          <p>Dealer Hand</p>
+        </div>
+      </div>
+
+      <p class="game-message">Please press the start button to begin the round.</p>
+
+      <div class="player-hand">
+        <img src="big-yoshi.jpeg" alt="Yoshi" width="250" height="auto" />
+        <div class="players-cards">
+          <p>Player Hand</p>
+        </div>
+      </div>
+
+    
+      <button class="hit-btn">Hit</button>
+      <button class="stand-btn">Stand</button>
+      <button class="start-btn">Start / Reset</button>
+    
+        
+    </div>
+    
+    <aside class="related">
+      <h3>Related Posts</h3>
+      <div class="poker">
+        <img src="Royal-Flush.jpeg" alt="Royal Flush in hearts" width=240 height=180 />
+      </div>
+      <div class="rummy">
+        <img src="Rummy.jpeg" alt="Gin rummy" width=240 height=180 />
+      </div>
+      <div class="crazy-eights">
+        <img src="Crazy-Eights.jpeg" alt="Crazy eights" width=240 height=180 />
+      </div>
+    </aside>
+    
     </div>
   </body>
 </html>

@@ -17,7 +17,7 @@ body {
 /* Styling the header that stays at the top when scrolling */
 .post-header {
   background: rgba(252, 252, 252, 1);
-  text-align: center;
+  /* text-align: center; */
   position: sticky;
   width: 100%;
   top: 0;
@@ -152,4 +152,120 @@ a:active {
   margin-top: 5px;
   margin-bottom: 15px;
   text-transform: uppercase;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-links {
+  display: flex;
+  gap: 10px;
+}
+
+.resources-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.footer {
+  width: 30%;
+  border-top: 3px black solid;
+  border-bottom: 3px black solid;
+}
+
+.row {
+  display: flex;
+  gap: 50px;
+  align-items: flex-start;
+}
+
+.footer {
+  flex: 0 0 150px;
+}
+
+.article {
+  flex: 1;
+}
+
+.game {
+  background-color: #add8e6;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-family: sans-serif;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.game h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.game-message {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.dealer-hand {
+  display: flex;
+  gap: 15px;
+}
+
+.player-hand {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.dealers-cards {
+  overflow-x: scroll;
+  flex: 0 1 700px;
+  background-color: black;
+}
+
+.dealers-cards p {
+  text-align: center;
+  color: white;
+  margin-top: 5px;
+}
+
+.players-cards {
+  overflow-x: scroll;
+  flex: 0 1 700px;
+  background-color: black;
+}
+
+.players-cards p {
+  text-align: center;
+  color: white;
+  margin-top: 5px;
+}
+
+.game button {
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  background-color: #4caf50;
+  color: white;
+  padding: 16px 32px;
+  transition-duration: 0.4s;
+  margin-right: 5px;
+}
+
+.game button:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
 }
