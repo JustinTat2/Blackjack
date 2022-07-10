@@ -1,106 +1,174 @@
 "use strict";
 
-// Selecting elements, then storing them in variables for convenience.
-const chips = document.getElementById("chipTotal");
-const hitBtn = document.getElementById("hitButton");
-const standBtn = document.getElementById("standButton");
-const newRoundBtn = document.getElementById("newRoundButton");
-const playerScore = document.getElementById("playerScore");
-const dealerScore = document.getElementById("dealerScore");
-const playerCard = document.getElementById("playerCard");
-const dealerCard = document.getElementById("dealerCard");
-const wager = document.getElementById("wager");
+// Select the score elements
+const dealerScore = document.querySelector(".dealer-score");
+const playerScore = document.querySelector(".player-score");
+
+// Select the game message.
+const gameMessage = document.querySelector(".game-message");
+
+// Select the three green buttons.
+const hitBtn = document.querySelector(".hit-btn");
+const standBtn = document.querySelector(".stand-btn");
+const startBtn = document.querySelector(".start-btn");
+
+// Select the div containers where the cards will appear.
+const dealerCards = document.querySelector(".dealers-cards");
+const playerCards = document.querySelector(".players-cards");
 
 let playing;
 let number;
-let playerTotal, dealerTotal;
+let playerHasAce;
+let dealerHasAce;
 
-// Should be ran everytime a user clicks the 'New Round' button.
-const init = function () {
-  if (
-    !wager.value ||
-    wager.value > Number(chips.textContent) ||
-    wager.value < 1 ||
-    chips.textContent == 0
-  ) {
-    console.log("Sorry, you can't play again!");
-    return;
+function init() {
+  dealerScore.textContent = 0;
+  playerScore.textContent = 0;
+  gameMessage.textContent = "Hit or stand? Choose wisely.";
+
+  while (dealerCards.children.length > 2) {
+    dealerCards.removeChild(dealerCards.lastChild);
   }
 
-  playerScore.textContent = 0;
-  dealerScore.textContent = 0;
-  playerCard.src = "card_1.png";
-  dealerCard.src = "card_1.png";
+  while (playerCards.children.length > 2) {
+    playerCards.removeChild(playerCards.lastChild);
+  }
 
-  playerTotal = 0;
-  dealerTotal = 0;
   playing = true;
+  playerHasAce = false;
+  dealerHasAce = false;
 
-  // Player's cards (two at the beginning)
-  number = Math.trunc(Math.random() * 11) + 1;
-  playerTotal += number;
-  playerCard.src = `card_${number}.png`;
-  playerScore.textContent = String(playerTotal);
+  // Look into refactoring later (DRY principle).
+  number = Math.floor(Math.random() * 10 + 1);
+  if (number === 1) {
+    playerHasAce = true;
+  }
+  playerScore.textContent = String(Number(playerScore.textContent) + number);
+  const playerFirstCard = document.createElement("IMG");
+  playerFirstCard.src = `card_${number}.png`;
+  playerFirstCard.height = "120";
+  playerFirstCard.width = "100";
+  playerCards.appendChild(playerFirstCard);
 
-  number = Math.trunc(Math.random() * 11) + 1;
-  playerTotal += number;
-  playerCard.src = `card_${number}.png`;
-  playerScore.textContent = String(playerTotal);
+  number = Math.floor(Math.random() * 10 + 1);
+  if (number === 1) {
+    playerHasAce = true;
+  }
+  playerScore.textContent = String(Number(playerScore.textContent) + number);
+  const playerSecondCard = document.createElement("IMG");
+  playerSecondCard.src = `card_${number}.png`;
+  playerSecondCard.height = "120";
+  playerSecondCard.width = "100";
+  playerSecondCard.style.marginLeft = "10px";
+  playerCards.appendChild(playerSecondCard);
 
-  // Dealer's card (one is shown)
-  number = Math.trunc(Math.random() * 11) + 1;
-  dealerTotal += number;
-  dealerCard.src = `card_${number}.png`;
-  dealerScore.textContent = String(dealerTotal);
+  number = Math.floor(Math.random() * 10 + 1);
+  if (number === 1) {
+    dealerHasAce = true;
+  }
+  dealerScore.textContent = String(Number(dealerScore.textContent) + number);
+  const dealerFirstCard = document.createElement("IMG");
+  dealerFirstCard.src = `card_${number}.png`;
+  dealerFirstCard.height = "120";
+  dealerFirstCard.width = "100";
+  dealerCards.appendChild(dealerFirstCard);
 
-  if (playerTotal === 21) {
-    console.log("Player wins!");
-    chips.textContent = String(Number(chips.textContent) + wager.value * 1.5);
+  if (playerHasAce && Number(playerScore.textContent) + 10 === 21) {
+    playerScore.textContent = "21";
+    gameMessage.textContent =
+      "Player has won! Press start button to start another round.";
     playing = false;
   }
-};
 
-newRoundBtn.addEventListener("click", init);
-
-hitBtn.addEventListener("click", function () {
-  if (playing) {
-    number = Math.trunc(Math.random() * 11) + 1;
-    playerTotal += number;
-    playerCard.src = `card_${number}.png`;
-    playerScore.textContent = playerTotal;
-
-    if (playerTotal > 21) {
-      console.log("Player has busted!");
-      chips.textContent = String(Number(chips.textContent) - wager.value);
-      playing = false;
-    }
+  if (dealerHasAce) {
+    dealerScore.textContent = String(Number(dealerScore.textContent) + 10);
   }
-});
+}
 
-standBtn.addEventListener("click", function () {
-  if (playing) {
-    while (dealerTotal < 17) {
-      number = Math.trunc(Math.random() * 11) + 1;
-      dealerTotal += number;
-      dealerCard.src = `card_${number}.png`;
-      dealerScore.textContent = dealerTotal;
-    }
+//
 
-    if (playerTotal < dealerTotal) {
-      console.log("Player loses!");
-      chips.textContent = String(Number(chips.textContent) - wager.value);
-      playing = false;
-    }
+function hit() {
+  if (playing === false) return;
+  number = Math.floor(Math.random() * 10 + 1);
+  playerScore.textContent = String(Number(dealerScore.textContent) + number);
+  const card = document.createElement("IMG");
+  card.src = `card_${number}.png`;
+  card.height = "120";
+  card.width = "100";
+  card.style.marginLeft = "10px";
+  playerCards.appendChild(card);
 
-    if (playerTotal === dealerTotal) {
-      console.log("It's a push!");
-      playing = false;
-    }
-
-    if (playerTotal > dealerTotal || dealerTotal > 21) {
-      console.log("Player wins!");
-      chips.textContent = String(Number(chips.textContent) + wager.value * 2);
-      playing = false;
-    }
+  if (number === 1) {
+    playerHasAce = true;
   }
-});
+
+  if (Number(playerScore.textContent) === 21) {
+    gameMessage.textContent =
+      "Player has won! Press start button to start another round.";
+    playing = false;
+  }
+
+  if (Number(playerScore.textContent) > 21) {
+    gameMessage.textContent =
+      "Player has busted! Dealer wins! Press start button to start another round.";
+    playing = false;
+  }
+}
+
+//
+
+function stand() {
+  if (playing === false) return;
+
+  if (playerHasAce && Number(playerScore.textContent) + 10 <= 21) {
+    playerScore.textContent = String(Number(playerScore.textContent) + 10);
+  }
+
+  while (Number(dealerScore.textContent) < 17) {
+    number = Math.floor(Math.random() * 10 + 1);
+
+    dealerScore.textContent = String(Number(dealerScore.textContent) + number);
+
+    if (number === 1 && !dealerHasAce) {
+      dealerHasAce = true;
+      if (Number(dealerScore.textContent) + 10 <= 21) {
+        dealerScore.textContent = String(Number(dealerScore.textContent) + 10);
+      }
+    }
+
+    const card = document.createElement("IMG");
+    card.src = `card_${number}.png`;
+    card.height = "120";
+    card.width = "100";
+    card.style.marginLeft = "10px";
+    dealerCards.appendChild(card);
+  }
+
+  if (Number(dealerScore.textContent) > 21) {
+    gameMessage.textContent =
+      "Dealer has busted! Player wins! Press start button to start another round.";
+    playing = false;
+  }
+
+  if (Number(dealerScore.textContent) === Number(playerScore.textContent)) {
+    gameMessage.textContent =
+      "It's a tie! Press start button to start another round.";
+    playing = false;
+  }
+
+  if (Number(dealerScore.textContent) > Number(playerScore.textContent)) {
+    gameMessage.textContent =
+      "Dealer wins! Press start button to start another round.";
+    playing = false;
+  }
+
+  if (Number(playerScore.textContent) > Number(dealerScore.textContent)) {
+    gameMessage.textContent =
+      "Player wins! Press start button to start another round.";
+    playing = false;
+  }
+}
+
+startBtn.addEventListener("click", init);
+hitBtn.addEventListener("click", hit);
+standBtn.addEventListener("click", stand);
