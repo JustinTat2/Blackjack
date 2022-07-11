@@ -112,12 +112,14 @@ function hit() {
     gameMessage.textContent =
       "Player has won! Press start button to start another round.";
     playing = false;
+    return;
   }
 
   if (Number(playerScore.textContent) > 21) {
     gameMessage.textContent =
       "Player has busted! Dealer wins! Press start button to start another round.";
     playing = false;
+    return;
   }
 }
 
@@ -154,24 +156,28 @@ function stand() {
     gameMessage.textContent =
       "Dealer has busted! Player wins! Press start button to start another round.";
     playing = false;
+    return;
   }
 
   if (Number(dealerScore.textContent) === Number(playerScore.textContent)) {
     gameMessage.textContent =
       "It's a tie! Press start button to start another round.";
     playing = false;
+    return;
   }
 
   if (Number(dealerScore.textContent) > Number(playerScore.textContent)) {
     gameMessage.textContent =
       "Dealer wins! Press start button to start another round.";
     playing = false;
+    return;
   }
 
   if (Number(playerScore.textContent) > Number(dealerScore.textContent)) {
     gameMessage.textContent =
       "Player wins! Press start button to start another round.";
     playing = false;
+    return;
   }
 }
 
