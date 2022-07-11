@@ -1,4 +1,4 @@
-"use strict";
+("use strict");
 
 // Select the score elements
 const dealerScore = document.querySelector(".dealer-score");
@@ -22,8 +22,8 @@ let playerHasAce;
 let dealerHasAce;
 
 function init() {
-  dealerScore.textContent = 0;
-  playerScore.textContent = 0;
+  dealerScore.textContent = "0";
+  playerScore.textContent = "0";
   gameMessage.textContent = "Hit or stand? Choose wisely.";
 
   while (dealerCards.children.length > 2) {
@@ -90,7 +90,13 @@ function init() {
 function hit() {
   if (playing === false) return;
   number = Math.floor(Math.random() * 10 + 1);
-  playerScore.textContent = String(Number(dealerScore.textContent) + number);
+  playerScore.textContent = String(Number(playerScore.textContent) + number);
+
+  console.log(number);
+  console.log(typeof number);
+  console.log(playerScore.textContent);
+  console.log(typeof playerScore.textContent);
+
   const card = document.createElement("IMG");
   card.src = `card_${number}.png`;
   card.height = "120";
@@ -129,7 +135,7 @@ function stand() {
 
     dealerScore.textContent = String(Number(dealerScore.textContent) + number);
 
-    if (number === 1 && !dealerHasAce) {
+    if (number === 1 && dealerHasAce === false) {
       dealerHasAce = true;
       if (Number(dealerScore.textContent) + 10 <= 21) {
         dealerScore.textContent = String(Number(dealerScore.textContent) + 10);
