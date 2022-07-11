@@ -1,13 +1,13 @@
 ("use strict");
 
-// Select the score elements
+// Select score elements
 const dealerScore = document.querySelector(".dealer-score");
 const playerScore = document.querySelector(".player-score");
 
-// Select the game message.
+// Select game message.
 const gameMessage = document.querySelector(".game-message");
 
-// Select the three green buttons.
+// Select buttons.
 const hitBtn = document.querySelector(".hit-btn");
 const standBtn = document.querySelector(".stand-btn");
 const startBtn = document.querySelector(".start-btn");
@@ -21,11 +21,42 @@ let number;
 let playerHasAce;
 let dealerHasAce;
 
+function addPlayerCard() {
+  number = Math.floor(Math.random() * 10 + 1);
+  if (number === 1) {
+    playerHasAce = true;
+  }
+  const card = document.createElement("IMG");
+  card.src = `card_${number}.png`;
+  card.height = "120";
+  card.width = "100";
+  card.style.marginLeft = "5px";
+  playerCards.appendChild(card);
+
+  playerScore.textContent = String(Number(playerScore.textContent) + number);
+}
+
+function addDealerCard() {
+  number = Math.floor(Math.random() * 10 + 1);
+  if (number === 1) {
+    dealerHasAce = true;
+  }
+  const card = document.createElement("IMG");
+  card.src = `card_${number}.png`;
+  card.height = "120";
+  card.width = "100";
+  card.style.marginLeft = "5px";
+  dealerCards.appendChild(card);
+
+  dealerScore.textContent = String(Number(dealerScore.textContent) + number);
+}
+
 function init() {
   dealerScore.textContent = "0";
   playerScore.textContent = "0";
-  gameMessage.textContent = "Hit or stand? Choose wisely.";
+  gameMessage.textContent = "Hit or stand?";
 
+  // Clear the cards from the last round.
   while (dealerCards.children.length > 2) {
     dealerCards.removeChild(dealerCards.lastChild);
   }
@@ -34,148 +65,84 @@ function init() {
     playerCards.removeChild(playerCards.lastChild);
   }
 
+  // Reset variables
   playing = true;
   playerHasAce = false;
   dealerHasAce = false;
 
-  // Look into refactoring later (DRY principle).
-  number = Math.floor(Math.random() * 10 + 1);
-  if (number === 1) {
-    playerHasAce = true;
-  }
-  playerScore.textContent = String(Number(playerScore.textContent) + number);
-  const playerFirstCard = document.createElement("IMG");
-  playerFirstCard.src = `card_${number}.png`;
-  playerFirstCard.height = "120";
-  playerFirstCard.width = "100";
-  playerCards.appendChild(playerFirstCard);
+  addPlayerCard();
+  addPlayerCard();
 
-  number = Math.floor(Math.random() * 10 + 1);
-  if (number === 1) {
-    playerHasAce = true;
-  }
-  playerScore.textContent = String(Number(playerScore.textContent) + number);
-  const playerSecondCard = document.createElement("IMG");
-  playerSecondCard.src = `card_${number}.png`;
-  playerSecondCard.height = "120";
-  playerSecondCard.width = "100";
-  playerSecondCard.style.marginLeft = "10px";
-  playerCards.appendChild(playerSecondCard);
+  addDealerCard();
 
-  number = Math.floor(Math.random() * 10 + 1);
-  if (number === 1) {
-    dealerHasAce = true;
-  }
-  dealerScore.textContent = String(Number(dealerScore.textContent) + number);
-  const dealerFirstCard = document.createElement("IMG");
-  dealerFirstCard.src = `card_${number}.png`;
-  dealerFirstCard.height = "120";
-  dealerFirstCard.width = "100";
-  dealerCards.appendChild(dealerFirstCard);
+  // Dealer's first ace must be an 11, if the total does not exceed 21.
+  if (dealerHasAce)
+    dealerScore.textContent = String(Number(dealerScore.textContent) + 10);
 
+  // If a player gets an Ace and a 10 on their first two cards.
   if (playerHasAce && Number(playerScore.textContent) + 10 === 21) {
     playerScore.textContent = "21";
-    gameMessage.textContent =
-      "Player has won! Press start button to start another round.";
+    gameMessage.textContent = "Player wins! Press start button to play again.";
     playing = false;
-  }
-
-  if (dealerHasAce) {
-    dealerScore.textContent = String(Number(dealerScore.textContent) + 10);
   }
 }
 
-//
-
 function hit() {
   if (playing === false) return;
-  number = Math.floor(Math.random() * 10 + 1);
-  playerScore.textContent = String(Number(playerScore.textContent) + number);
 
-  console.log(number);
-  console.log(typeof number);
-  console.log(playerScore.textContent);
-  console.log(typeof playerScore.textContent);
-
-  const card = document.createElement("IMG");
-  card.src = `card_${number}.png`;
-  card.height = "120";
-  card.width = "100";
-  card.style.marginLeft = "10px";
-  playerCards.appendChild(card);
-
-  if (number === 1) {
-    playerHasAce = true;
-  }
+  addPlayerCard();
 
   if (Number(playerScore.textContent) === 21) {
-    gameMessage.textContent =
-      "Player has won! Press start button to start another round.";
+    gameMessage.textContent = "Player wins! Press start button to play again.";
     playing = false;
     return;
   }
 
   if (Number(playerScore.textContent) > 21) {
     gameMessage.textContent =
-      "Player has busted! Dealer wins! Press start button to start another round.";
+      "Player busts! Dealer wins! Press start button to play again.";
     playing = false;
     return;
   }
 }
 
-//
-
 function stand() {
   if (playing === false) return;
 
+  // If a player's ace can turn from a 1 to an 11 without exceeding 21, we do it.
   if (playerHasAce && Number(playerScore.textContent) + 10 <= 21) {
     playerScore.textContent = String(Number(playerScore.textContent) + 10);
   }
 
   while (Number(dealerScore.textContent) < 17) {
-    number = Math.floor(Math.random() * 10 + 1);
+    addDealerCard();
 
-    dealerScore.textContent = String(Number(dealerScore.textContent) + number);
-
-    if (number === 1 && dealerHasAce === false) {
-      dealerHasAce = true;
-      if (Number(dealerScore.textContent) + 10 <= 21) {
-        dealerScore.textContent = String(Number(dealerScore.textContent) + 10);
-      }
+    if (dealerHasAce && Number(dealerScore.textContent) + 10 <= 21) {
+      dealerScore.textContent = String(Number(dealerScore.textContent) + 10);
     }
-
-    const card = document.createElement("IMG");
-    card.src = `card_${number}.png`;
-    card.height = "120";
-    card.width = "100";
-    card.style.marginLeft = "10px";
-    dealerCards.appendChild(card);
   }
 
   if (Number(dealerScore.textContent) > 21) {
     gameMessage.textContent =
-      "Dealer has busted! Player wins! Press start button to start another round.";
+      "Dealer busts! Player wins! Press start button to play again.";
     playing = false;
     return;
   }
 
   if (Number(dealerScore.textContent) === Number(playerScore.textContent)) {
-    gameMessage.textContent =
-      "It's a tie! Press start button to start another round.";
+    gameMessage.textContent = "It's a push! Press start button to play again.";
     playing = false;
     return;
   }
 
   if (Number(dealerScore.textContent) > Number(playerScore.textContent)) {
-    gameMessage.textContent =
-      "Dealer wins! Press start button to start another round.";
+    gameMessage.textContent = "Dealer wins! Press start button to play again.";
     playing = false;
     return;
   }
 
   if (Number(playerScore.textContent) > Number(dealerScore.textContent)) {
-    gameMessage.textContent =
-      "Player wins! Press start button to start another round.";
+    gameMessage.textContent = "Player wins! Press start button to play again.";
     playing = false;
     return;
   }
