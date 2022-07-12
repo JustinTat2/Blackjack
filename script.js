@@ -1,18 +1,14 @@
 ("use strict");
 
-// Select score elements
 const dealerScore = document.querySelector(".dealer-score");
 const playerScore = document.querySelector(".player-score");
 
-// Select game message.
 const gameMessage = document.querySelector(".game-message");
 
-// Select buttons.
 const hitBtn = document.querySelector(".hit-btn");
 const standBtn = document.querySelector(".stand-btn");
 const startBtn = document.querySelector(".start-btn");
 
-// Select the div containers where the cards will appear.
 const dealerCards = document.querySelector(".dealers-cards");
 const playerCards = document.querySelector(".players-cards");
 
@@ -34,6 +30,13 @@ function addPlayerCard() {
   playerCards.appendChild(card);
 
   playerScore.textContent = String(Number(playerScore.textContent) + number);
+
+  // Ex. A player gets a 10 and an Ace.
+  if (playerHasAce && Number(playerScore.textContent) + 10 === 21) {
+    playerScore.textContent = "21";
+    gameMessage.textContent = "Player wins!";
+    playing = false;
+  }
 }
 
 function addDealerCard() {
@@ -49,6 +52,11 @@ function addDealerCard() {
   dealerCards.appendChild(card);
 
   dealerScore.textContent = String(Number(dealerScore.textContent) + number);
+
+  // Dealer's first Ace must count as 11, unless doing so would exceed 21.
+  if (dealerHasAce && Number(dealerScore.textContent) + 10 <= 21) {
+    dealerScore.textContent = String(Number(dealerScore.textContent) + 10);
+  }
 }
 
 function init() {
@@ -74,17 +82,6 @@ function init() {
   addPlayerCard();
 
   addDealerCard();
-
-  // Dealer's first ace must be an 11, if the total does not exceed 21.
-  if (dealerHasAce)
-    dealerScore.textContent = String(Number(dealerScore.textContent) + 10);
-
-  // If a player gets an Ace and a 10 on their first two cards.
-  if (playerHasAce && Number(playerScore.textContent) + 10 === 21) {
-    playerScore.textContent = "21";
-    gameMessage.textContent = "Player wins! Press start button to play again.";
-    playing = false;
-  }
 }
 
 function hit() {
@@ -93,14 +90,13 @@ function hit() {
   addPlayerCard();
 
   if (Number(playerScore.textContent) === 21) {
-    gameMessage.textContent = "Player wins! Press start button to play again.";
+    gameMessage.textContent = "Player wins!";
     playing = false;
     return;
   }
 
   if (Number(playerScore.textContent) > 21) {
-    gameMessage.textContent =
-      "Player busts! Dealer wins! Press start button to play again.";
+    gameMessage.textContent = "Player busts! Dealer wins!";
     playing = false;
     return;
   }
@@ -109,40 +105,34 @@ function hit() {
 function stand() {
   if (playing === false) return;
 
-  // If a player's ace can turn from a 1 to an 11 without exceeding 21, we do it.
+  // If a player's ace can turn from a 1 to an 11 without exceeding 21.
   if (playerHasAce && Number(playerScore.textContent) + 10 <= 21) {
     playerScore.textContent = String(Number(playerScore.textContent) + 10);
   }
 
-  while (Number(dealerScore.textContent) < 17) {
-    addDealerCard();
+  while (Number(dealerScore.textContent) < 17) addDealerCard();
 
-    if (dealerHasAce && Number(dealerScore.textContent) + 10 <= 21) {
-      dealerScore.textContent = String(Number(dealerScore.textContent) + 10);
-    }
-  }
-
+  // Check conditions
   if (Number(dealerScore.textContent) > 21) {
-    gameMessage.textContent =
-      "Dealer busts! Player wins! Press start button to play again.";
+    gameMessage.textContent = "Dealer busts! Player wins!";
     playing = false;
     return;
   }
 
   if (Number(dealerScore.textContent) === Number(playerScore.textContent)) {
-    gameMessage.textContent = "It's a push! Press start button to play again.";
+    gameMessage.textContent = "It's a tie!";
     playing = false;
     return;
   }
 
   if (Number(dealerScore.textContent) > Number(playerScore.textContent)) {
-    gameMessage.textContent = "Dealer wins! Press start button to play again.";
+    gameMessage.textContent = "Dealer wins!";
     playing = false;
     return;
   }
 
   if (Number(playerScore.textContent) > Number(dealerScore.textContent)) {
-    gameMessage.textContent = "Player wins! Press start button to play again.";
+    gameMessage.textContent = "Player wins!";
     playing = false;
     return;
   }
