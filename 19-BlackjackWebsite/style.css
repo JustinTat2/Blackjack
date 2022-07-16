@@ -1,0 +1,188 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Helvetica;
+}
+
+.landing-page {
+  background-image: url("landing-page-images/Background.webp");
+  height: 100vh;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 10px;
+  padding: 8px 16px;
+}
+
+.links {
+  display: flex;
+  gap: 20px;
+}
+
+.article-title {
+  display: grid;
+  height: calc(100vh - 44px);
+
+  justify-content: center;
+  align-content: center;
+
+  grid-template-columns: 300px, 1fr;
+  row-gap: 20px;
+  column-gap: 20px;
+}
+
+.blackjack {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  border-radius: 10px;
+}
+
+.blackjack--table {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  border-radius: 10px;
+}
+
+.title-text {
+  grid-column: 2 / 3;
+  grid-row: 1 / span 2;
+  align-self: center;
+}
+
+.content {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.content p:first-child {
+  margin-top: 40px;
+}
+
+h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.fun-facts li {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+.fun-facts li:last-child {
+  margin-bottom: 20px;
+}
+
+.rules li {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+.rules li:last-child {
+  margin-bottom: 30px;
+}
+
+/* GAME */
+
+.game {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dealer {
+  display: flex;
+  gap: 15px;
+}
+
+.player {
+  display: flex;
+  gap: 15px;
+}
+
+.game-message {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.dealer-hand {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  background: black;
+  flex: 0 1 70%;
+  height: 200px;
+  border: 2px solid black;
+}
+
+.player-hand {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  background: black;
+  flex: 0 1 70%;
+  height: 200px;
+  border: 2px solid black;
+  margin-bottom: 20px;
+}
+
+.luigi {
+  flex: 0 1 250px;
+}
+
+.mario {
+  flex: 0 1 250px;
+}
+
+.dealer-score {
+  margin-left: auto;
+  margin-right: 10px;
+  align-self: center;
+  font-size: 24px;
+  color: white;
+  order: 1;
+}
+
+.player-score {
+  margin-left: auto;
+  margin-right: 10px;
+  align-self: center;
+  font-size: 24px;
+  color: white;
+  order: 1;
+}
+
+.game button {
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  background-color: #4caf50;
+  color: white;
+  padding: 16px 32px;
+  transition-duration: 0.4s;
+  margin-right: 5px;
+}
+
+.game button:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}

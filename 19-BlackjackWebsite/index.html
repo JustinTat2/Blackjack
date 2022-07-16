@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="icons8-spades-50.png" />
+    <title>Basics of Blackjack ♠️</title>
+  </head>
+
+  <body>
+    <div class="landing-page">
+      <header class="page-header">
+        <h1>Justin Tat</h1>
+        <div class="links">
+          <a href="https://github.com/JustinTat2" target="_blank">
+            <img
+              src="social-media-icons/GitHub.png"
+              alt="GitHub logo"
+              width="25"
+              height="25"
+            />
+          </a>
+
+          <a href="https://twitter.com/JustinTat5" target="_blank">
+            <img
+              src="social-media-icons/Twitter.png"
+              alt="Twitter logo"
+              width="25"
+              height="25"
+            />
+          </a>
+
+          <a href="https://www.linkedin.com/in/justin-tat/" target="_blank">
+            <img
+              src="social-media-icons/LinkedIn.png"
+              alt="LinkedIn logo"
+              width="25"
+              height="25"
+            />
+          </a>
+        </div>
+      </header>
+
+      <div class="article-title">
+        <img
+          class="blackjack"
+          src="landing-page-images/Blackjack.jpeg"
+          alt="Ace and King of Spades (blackjack)"
+          width="300"
+          height="200"
+        />
+        <img
+          class="blackjack--table"
+          src="landing-page-images/Blackjack-Table.avif"
+          alt="Blackjack table"
+          width="300"
+          height="200"
+        />
+        <h2 class="title-text">
+          Everything You Need To Know About Blackjack &#9824;
+        </h2>
+      </div>
+    </div>
+
+    <article class="content">
+      <p>
+        Hello everyone! In this blog post, I will teach you
+        <strong>everything</strong> you need to know about the popular card game
+        Blackjack.
+      </p>
+
+      <h3>Origins</h3>
+      <p>
+        The origins of Blackjack is still under debate, but researchers agree
+        that Blackjack probably originated in the French casinos around 1700.
+        The French cards were called <em>"Vingt-et-Un"</em>, which translates to
+        "Twenty-one." These cards are probably derived from card games Chemin de
+        Fer, which were popular at that time. The card game was played at the
+        French Royal Court during the reign of King Louis XV.
+      </p>
+
+      <h3>The Rules</h3>
+      <p>
+        The goal of Blackjack is to have a hand that totals higher than the
+        dealer, but doesn't total to higher than 21. If your hand totals higher
+        than 21, it is called a "bust", which means you are out of the game.
+      </p>
+      <p>
+        The game starts with everyone besides the dealer placing a bet. Then,
+        the dealer deals 1 card face up to each player and 1 card face up to
+        themselves. Everyone is dealt one more face-up card besides the dealer,
+        whose second card is dealt face down.
+      </p>
+      <p>
+        Cards 2 through 10 are scored using their face value, and Jacks, Queens,
+        and Kings are all equal to 10. Aces can be either 1 or 11, and you can
+        choose their value throughout the round if you have one.
+      </p>
+      <p>
+        If your two face-up cards total 21, you automatically win one and a half
+        times your bet from the dealer, and you're done for that round.
+        Otherwise, the dealer asks whether you want another card from the top of
+        the deck. If you do, say "hit" or motion towards yourself with your
+        hand. There's no limit to how many cards you can ask for, but once your
+        hand totals higher than 21, you bust and the dealer gets your bet. If
+        you don't want any more cards, say "stay" or wave your hand over the
+        table.
+      </p>
+      <p>
+        Once the dealer has gone around the table, they flip up their face-down
+        card. If it's 16 or under, they have to take another card. If it's 17 or
+        higher, they have to stay with their hand. If the dealer busts, every
+        player that's still in that round wins twice their bet. However, if the
+        dealer doesn't bust, only the players whose hands are higher than the
+        dealer's win twice their bet. Everyone else loses their initial bet.
+      </p>
+      <p>
+        Once the round is over, all of the players place a new bet, and another
+        round begins.
+      </p>
+
+      <h3>Fun Facts</h3>
+      <ul class="fun-facts">
+        <li>
+          The longest game of Blackjack lasted over 50 hours. According to the
+          Guinness World Records, Stephen De Raffaele dealt cards for over two
+          days between 24-27 August 2001 at the Oracle Casino, Qawra, Malta.
+        </li>
+        <li>
+          Your chances of getting a natural blackjack are just
+          <strong>4.8%</strong>. That is equivalent to about 1 in 21 blackjack
+          hands!
+        </li>
+        <li>
+          Counting cards is legal. For the unacquainted, card counting refers to
+          a strategy in Blackjack where a player keeps a mental tally of the
+          cards played in order to calculate the probability of certain cards
+          being dealt and therefore obtain an advantage.
+        </li>
+        <li>
+          16 is said to be the worst hand in Blackjack. That's because players
+          are usually afraid to "hit" as they might exceed 21 and bust. On the
+          other hand, if they choose to stay with their 16, it's typically not
+          enough to beat the dealer.
+        </li>
+        <li>
+          Statistically, the dealer will bust almost a third of all hands, or
+          29.1%, to be exact. However, one can argue that dealers have a certain
+          edge over you because you have to beat them, but they have no
+          obligation to beat you.
+        </li>
+      </ul>
+
+      <h3>How to Play My Implementation of Blackjack</h3>
+      <ol class=rules>
+        <li>Press the start button (right) to start a new round. Your cards will be shown inside the second black box, next to the image of Mario. There will also be a number on the right side of your box to indicate the current value of your hand.</li>
+        <li>The dealer's first Ace must count as 11, unless doing so would cause the dealer to bust. A player's ace initially counts as 1 but can be converted into an 11 when the player stands if it is possible to do so without busting. Keep this in mind before deciding to hit or stand.</li>
+        <li>To add a card to your hand, press the hit button (left).</li>
+        <li>To stand, press the stand button (middle).</li>
+        <li>If the value of the dealer's hand is below 17, the dealer must continue taking cards until the value is 17 or higher.</li>
+      </ol>
+
+      <div class="game">
+
+        <div class="dealer">
+          <div class="dealer-hand">
+            <p class="dealer-score">0</p> 
+          </div>
+          <img class="luigi" src="game-images/luigi.jpeg" alt="Luigi" width="250" height="200"/>
+        </div>
+        
+        <p class="game-message">Please press the start button to start the round.
+        </p>
+
+        <div class="player">
+          <div class="player-hand">
+            <p class="player-score">0</p>
+          </div>
+          <img class="mario" src="game-images/Mario.jpeg" alt="Yoshi" width="250" height="200" />
+        </div>
+
+        <button class="hit-btn">Hit</button>
+        <button class="stand-btn">Stand</button>
+        <button class="start-btn">Start</button>
+
+      </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
