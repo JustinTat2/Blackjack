@@ -9,6 +9,8 @@ Update 3 on July 11th - Did some more refectoring. Will probably improve HTML an
 
 Update 4 on July 15th - Massive overhaul of user interface. Practiced some more with CSS techniques such as Flexbox and CSSGrid. Getting the hang of it.
 
+Update 5 on July 17th - Used arrays, splice, index methods to implement BJ game with all suits. This makes the game much more realistic. 
+
 
 Sources:
 
@@ -27,3 +29,5 @@ https://www.youtube.com/watch?v=eyoh-Ku9TCI for the Rules
 https://goodyfeed.com/10-facts-blackjack/ for Fun Facts
 
 https://www.liveabout.com/blackjack-dealer-bust-percentages-537109 and Unsplash for Blackjack images
+
+https://www.improvemagic.com/all-playing-cards-names-with-pictures/ for the card images.
