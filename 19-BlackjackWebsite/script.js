@@ -17,13 +17,24 @@ let number;
 let playerHasAce;
 let dealerHasAce;
 
+let deck;
+let change = [11, 12, 13, 24, 25, 26, 37, 38, 39, 50, 51, 52];
+
 function addPlayerCard() {
-  number = Math.floor(Math.random() * 10 + 1);
+  let randomElement = deck[Math.floor(Math.random() * deck.length)];
+
+  if (change.includes(randomElement)) {
+    number = 10;
+  } else {
+    number = randomElement % 13;
+  }
+
   if (number === 1) {
     playerHasAce = true;
   }
+
   const card = document.createElement("IMG");
-  card.src = `card-images/card_${number}.png`;
+  card.src = `cards/card_${randomElement}.png`;
   card.height = "120";
   card.width = "100";
   card.style.marginLeft = "5px";
@@ -37,15 +48,26 @@ function addPlayerCard() {
     gameMessage.textContent = "Player wins!";
     playing = false;
   }
+
+  const index = deck.indexOf(randomElement);
+  deck.splice(index, 1);
 }
 
 function addDealerCard() {
-  number = Math.floor(Math.random() * 10 + 1);
+  let randomElement = deck[Math.floor(Math.random() * deck.length)];
+
+  if (change.includes(randomElement)) {
+    number = 10;
+  } else {
+    number = randomElement % 13;
+  }
+
   if (number === 1) {
     dealerHasAce = true;
   }
+
   const card = document.createElement("IMG");
-  card.src = `card-images/card_${number}.png`;
+  card.src = `cards/card_${randomElement}.png`;
   card.height = "120";
   card.width = "100";
   card.style.marginLeft = "5px";
@@ -57,6 +79,9 @@ function addDealerCard() {
   if (dealerHasAce && Number(dealerScore.textContent) + 10 <= 21) {
     dealerScore.textContent = String(Number(dealerScore.textContent) + 10);
   }
+
+  const index = deck.indexOf(randomElement);
+  deck.splice(index, 1);
 }
 
 function init() {
@@ -77,6 +102,8 @@ function init() {
   playing = true;
   playerHasAce = false;
   dealerHasAce = false;
+
+  deck = Array.from({ length: 52 }, (_, i) => i + 1);
 
   addPlayerCard();
   addPlayerCard();
