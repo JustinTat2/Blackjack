@@ -1,0 +1,9 @@
+Every png of a playing card is labelled "card_{x}" where x is between 1 and 52.
+
+For 1 <= x <= 13, the cards are in the Clubs suit, in ascending order.
+
+For 14 <= x <= 26, the cards are in the Hearts suit, in ascending order.
+
+For 27 <= x <= 39, the cards are in the Spades suit, in ascending order.
+
+For 40 <= x <= 52, the cards are in the Diamonds suit, in ascending order.

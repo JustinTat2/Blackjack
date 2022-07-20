@@ -20,76 +20,12 @@ let dealerHasAce;
 let deck;
 let change = [11, 12, 13, 24, 25, 26, 37, 38, 39, 50, 51, 52];
 
-function addPlayerCard() {
-  let randomElement = deck[Math.floor(Math.random() * deck.length)];
-
-  if (change.includes(randomElement)) {
-    number = 10;
-  } else {
-    number = randomElement % 13;
-  }
-
-  if (number === 1) {
-    playerHasAce = true;
-  }
-
-  const card = document.createElement("IMG");
-  card.src = `cards/card_${randomElement}.png`;
-  card.height = "120";
-  card.width = "100";
-  card.style.marginLeft = "5px";
-  playerCards.appendChild(card);
-
-  playerScore.textContent = String(Number(playerScore.textContent) + number);
-
-  // Ex. A player gets a 10 and an Ace.
-  if (playerHasAce && Number(playerScore.textContent) + 10 === 21) {
-    playerScore.textContent = "21";
-    gameMessage.textContent = "Player wins!";
-    playing = false;
-  }
-
-  const index = deck.indexOf(randomElement);
-  deck.splice(index, 1);
-}
-
-function addDealerCard() {
-  let randomElement = deck[Math.floor(Math.random() * deck.length)];
-
-  if (change.includes(randomElement)) {
-    number = 10;
-  } else {
-    number = randomElement % 13;
-  }
-
-  if (number === 1) {
-    dealerHasAce = true;
-  }
-
-  const card = document.createElement("IMG");
-  card.src = `cards/card_${randomElement}.png`;
-  card.height = "120";
-  card.width = "100";
-  card.style.marginLeft = "5px";
-  dealerCards.appendChild(card);
-
-  dealerScore.textContent = String(Number(dealerScore.textContent) + number);
-
-  // Dealer's first Ace must count as 11, unless doing so would exceed 21.
-  if (dealerHasAce && Number(dealerScore.textContent) + 10 <= 21) {
-    dealerScore.textContent = String(Number(dealerScore.textContent) + 10);
-  }
-
-  const index = deck.indexOf(randomElement);
-  deck.splice(index, 1);
-}
-
 function init() {
   dealerScore.textContent = "0";
   playerScore.textContent = "0";
   gameMessage.textContent = "Hit or stand?";
 
-  // Clear the cards from the last round.
+  // Remove the cards from the previous round
   while (dealerCards.children.length > 1) {
     dealerCards.removeChild(dealerCards.lastChild);
   }
@@ -103,12 +39,66 @@ function init() {
   playerHasAce = false;
   dealerHasAce = false;
 
+  // Create array of ints 1-52 (for each playing card)
   deck = Array.from({ length: 52 }, (_, i) => i + 1);
 
   addPlayerCard();
   addPlayerCard();
 
   addDealerCard();
+}
+
+function addPlayerCard() {
+  let randomElement = deck[Math.floor(Math.random() * deck.length)];
+
+  // Jacks, Queens, and Kings
+  number = change.includes(randomElement) ? 10 : randomElement % 13;
+  
+  // Aces
+  if (number === 1) playerHasAce = true;
+
+  const card = document.createElement("IMG");
+  card.src = `cards/card_${randomElement}.png`;
+  card.height = "120";
+  card.width = "100";
+  card.style.marginLeft = "5px";
+  playerCards.appendChild(card);
+
+  playerScore.textContent = String(Number(playerScore.textContent) + number);
+
+  // If player gets 10 and Ace
+  if (playerHasAce && Number(playerScore.textContent) + 10 === 21) {
+    playerScore.textContent = "21";
+    gameMessage.textContent = "Player wins!";
+    playing = false;
+  }
+
+  // Card can't be used twice in a round
+  deck.splice(deck.indexOf(randomElement), 1);
+}
+
+function addDealerCard() {
+  let randomElement = deck[Math.floor(Math.random() * deck.length)];
+
+  number = change.includes(randomElement) ? 10 : randomElement % 13;
+
+  if (number === 1) dealerHasAce = true;
+
+  const card = document.createElement("IMG");
+  card.src = `cards/card_${randomElement}.png`;
+  card.height = "120";
+  card.width = "100";
+  card.style.marginLeft = "5px";
+  dealerCards.appendChild(card);
+
+  dealerScore.textContent = String(Number(dealerScore.textContent) + number);
+
+  // If possible, dealer's first Ace must count as 11
+  if (dealerHasAce && Number(dealerScore.textContent) + 10 <= 21) {
+    dealerScore.textContent = String(Number(dealerScore.textContent) + 10);
+  }
+
+  deck.splice(deck.indexOf(randomElement), 1);
 }
 
 function hit() {
@@ -132,7 +122,7 @@ function hit() {
 function stand() {
   if (playing === false) return;
 
-  // If a player's ace can turn from a 1 to an 11 without exceeding 21.
+  // If possible, turn player's Ace in 11
   if (playerHasAce && Number(playerScore.textContent) + 10 <= 21) {
     playerScore.textContent = String(Number(playerScore.textContent) + 10);
   }
