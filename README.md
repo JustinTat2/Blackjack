@@ -11,6 +11,8 @@ Update 4 on July 15th - Massive overhaul of user interface. Practiced some more 
 
 Update 5 on July 17th - Used arrays, splice, index methods to implement BJ game with all suits. This makes the game much more realistic. 
 
+Update 6 on July 19th - Improved code readability and added more comments
+
 
 Sources:
 
