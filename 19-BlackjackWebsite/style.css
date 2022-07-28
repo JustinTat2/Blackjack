@@ -58,7 +58,7 @@ body {
 }
 
 .content {
-  width: 1000px;
+  width: 1200px;
   margin: 0 auto;
 }
 
@@ -124,9 +124,10 @@ p {
   align-items: center;
   gap: 10px;
   background: black;
-  flex: 0 1 70%;
+  flex: 0 1 80%;
   height: 200px;
   border: 2px solid black;
+  border-radius: 10px;
 }
 
 .player-hand {
@@ -135,18 +136,21 @@ p {
   align-items: center;
   gap: 10px;
   background: black;
-  flex: 0 1 70%;
+  flex: 0 1 80%;
   height: 200px;
   border: 2px solid black;
   margin-bottom: 20px;
+  border-radius: 10px;
 }
 
 .luigi {
   flex: 0 1 250px;
+  border-radius: 10px;
 }
 
 .mario {
   flex: 0 1 250px;
+  border-radius: 10px;
 }
 
 .dealer-score {
@@ -182,7 +186,7 @@ p {
 }
 
 .game button:hover {
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: white;
   cursor: pointer;
 }

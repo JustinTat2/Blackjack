@@ -12,20 +12,31 @@ const startBtn = document.querySelector(".start-btn");
 const dealerCards = document.querySelector(".dealer-hand");
 const playerCards = document.querySelector(".player-hand");
 
-let playing;
-let number;
-let playerHasAce;
-let dealerHasAce;
+let playing, deck, playerHasAce, dealerHasAce;
 
-let deck;
-let change = [11, 12, 13, 24, 25, 26, 37, 38, 39, 50, 51, 52];
+function generateNum() {
+  const jqkCards = [11, 12, 13, 24, 25, 26, 37, 38, 39, 50, 51, 52];
+
+  let randomElement = deck[Math.floor(Math.random() * deck.length)];
+  let number = jqkCards.includes(randomElement) ? 10 : randomElement % 13;
+
+  return [randomElement, number];
+}
+
+function createCard(randomElement) {
+  const card = document.createElement("IMG");
+  card.src = `cards/card_${randomElement}.png`;
+  card.height = "120";
+  card.width = "100";
+  card.style.marginLeft = "5px";
+  return card;
+}
 
 function init() {
   dealerScore.textContent = "0";
   playerScore.textContent = "0";
   gameMessage.textContent = "Hit or stand?";
 
-  // Remove the cards from the previous round
   while (dealerCards.children.length > 1) {
     dealerCards.removeChild(dealerCards.lastChild);
   }
@@ -34,7 +45,6 @@ function init() {
     playerCards.removeChild(playerCards.lastChild);
   }
 
-  // Reset variables
   playing = true;
   playerHasAce = false;
   dealerHasAce = false;
@@ -49,47 +59,30 @@ function init() {
 }
 
 function addPlayerCard() {
-  let randomElement = deck[Math.floor(Math.random() * deck.length)];
+  const [randomElement, number] = generateNum();
 
-  // Jacks, Queens, and Kings
-  number = change.includes(randomElement) ? 10 : randomElement % 13;
-  
-  // Aces
   if (number === 1) playerHasAce = true;
 
-  const card = document.createElement("IMG");
-  card.src = `cards/card_${randomElement}.png`;
-  card.height = "120";
-  card.width = "100";
-  card.style.marginLeft = "5px";
-  playerCards.appendChild(card);
+  playerCards.appendChild(createCard(randomElement));
 
   playerScore.textContent = String(Number(playerScore.textContent) + number);
 
-  // If player gets 10 and Ace
+  // Ex. 10 and Ace
   if (playerHasAce && Number(playerScore.textContent) + 10 === 21) {
     playerScore.textContent = "21";
     gameMessage.textContent = "Player wins!";
     playing = false;
   }
 
-  // Card can't be used twice in a round
   deck.splice(deck.indexOf(randomElement), 1);
 }
 
 function addDealerCard() {
-  let randomElement = deck[Math.floor(Math.random() * deck.length)];
-
-  number = change.includes(randomElement) ? 10 : randomElement % 13;
+  const [randomElement, number] = generateNum();
 
   if (number === 1) dealerHasAce = true;
 
-  const card = document.createElement("IMG");
-  card.src = `cards/card_${randomElement}.png`;
-  card.height = "120";
-  card.width = "100";
-  card.style.marginLeft = "5px";
-  dealerCards.appendChild(card);
+  dealerCards.appendChild(createCard(randomElement));
 
   dealerScore.textContent = String(Number(dealerScore.textContent) + number);
 
@@ -129,7 +122,6 @@ function stand() {
 
   while (Number(dealerScore.textContent) < 17) addDealerCard();
 
-  // Check conditions
   if (Number(dealerScore.textContent) > 21) {
     gameMessage.textContent = "Dealer busts! Player wins!";
     playing = false;
