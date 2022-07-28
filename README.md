@@ -13,6 +13,8 @@ Update 5 on July 17th - Used arrays, splice, index methods to implement BJ game 
 
 Update 6 on July 19th - Improved code readability and added more comments
 
+Update 7 on July 28th - Did major code refactoring in accordance with DRY principle. Also did some styling. This might be the last commit for this project.
+
 
 Sources:
 
