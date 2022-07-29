@@ -126,21 +126,21 @@ function stand() {
     gameMessage.textContent = "Dealer busts! Player wins!";
     playing = false;
     return;
-  }
-
-  if (Number(dealerScore.textContent) === Number(playerScore.textContent)) {
+  } else if (
+    Number(dealerScore.textContent) === Number(playerScore.textContent)
+  ) {
     gameMessage.textContent = "It's a tie!";
     playing = false;
     return;
-  }
-
-  if (Number(dealerScore.textContent) > Number(playerScore.textContent)) {
+  } else if (
+    Number(dealerScore.textContent) > Number(playerScore.textContent)
+  ) {
     gameMessage.textContent = "Dealer wins!";
     playing = false;
     return;
-  }
-
-  if (Number(playerScore.textContent) > Number(dealerScore.textContent)) {
+  } else if (
+    Number(playerScore.textContent) > Number(dealerScore.textContent)
+  ) {
     gameMessage.textContent = "Player wins!";
     playing = false;
     return;
